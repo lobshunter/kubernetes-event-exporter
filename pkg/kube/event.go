@@ -2,9 +2,10 @@ package kube
 
 import (
 	"encoding/json"
-	corev1 "k8s.io/api/core/v1"
 	"strings"
 	"time"
+
+	corev1 "k8s.io/api/core/v1"
 )
 
 type EnhancedEvent struct {

@@ -1,8 +1,9 @@
 package exporter
 
 import (
-	"github.com/opsgenie/kubernetes-event-exporter/pkg/kube"
 	"regexp"
+
+	"github.com/opsgenie/kubernetes-event-exporter/pkg/kube"
 )
 
 // matchString is a method to clean the code. Error handling is omitted here because these

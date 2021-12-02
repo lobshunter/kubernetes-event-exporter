@@ -5,10 +5,11 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
+	"io/ioutil"
+
 	"github.com/Shopify/sarama"
 	"github.com/opsgenie/kubernetes-event-exporter/pkg/kube"
 	"github.com/rs/zerolog/log"
-	"io/ioutil"
 )
 
 // KafkaConfig is the Kafka producer configuration

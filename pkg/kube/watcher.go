@@ -33,7 +33,7 @@ func NewEventWatcher(config *rest.Config, namespace string, throttlePeriod int64
 		labelCache:      NewLabelCache(config),
 		annotationCache: NewAnnotationCache(config),
 		fn:              fn,
-		throttlePeriod:  time.Second*time.Duration(throttlePeriod),
+		throttlePeriod:  time.Second * time.Duration(throttlePeriod),
 	}
 
 	informer.AddEventHandler(watcher)
@@ -88,7 +88,6 @@ func (e *EventWatcher) onEvent(event *corev1.Event) {
 	}
 
 	e.fn(ev)
-	return
 }
 
 func (e *EventWatcher) OnDelete(obj interface{}) {

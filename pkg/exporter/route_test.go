@@ -212,7 +212,7 @@ func Test_GHIssue51(t *testing.T) {
 			Type: "Normal",
 		}},
 		Match: []Rule{{
-			Reason: "FailedCreatePodContainer",
+			Reason:   "FailedCreatePodContainer",
 			Receiver: "elastic",
 		}},
 	}

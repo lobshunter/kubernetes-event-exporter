@@ -2,6 +2,8 @@ package kube
 
 import (
 	"context"
+	"strings"
+
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -9,7 +11,6 @@ import (
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/restmapper"
-	"strings"
 )
 
 func GetObject(reference *v1.ObjectReference, clientset *kubernetes.Clientset, dynClient dynamic.Interface) (*unstructured.Unstructured, error) {
