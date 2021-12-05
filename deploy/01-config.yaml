@@ -7,10 +7,33 @@ data:
   config.yaml: |
     logLevel: error
     logFormat: json
+    throttlePeriod: 10
+    kubeQPS: 60
+    kubeBurst: 60
     route:
       routes:
         - match:
-            - receiver: "dump"
+            - namespace: ".*tps.*"
+              receiver: "loki"
+        - match:
+            - namespace: "test-infra$|kube-system|tidb-admin|local-static-provisioner|chaos-testing"
+              receiver: "loki"
     receivers:
-      - name: "dump"
-        stdout: {}
+      - name: "loki"
+        webhook:
+          endpoint: "http://test-infra-loki.test-infra-loki:3100/loki/api/v1/push"
+          headers:
+            Content-Type: application/json
+            User-Agent: kube-event-exporter 0.9
+          layout:
+            streams:
+              - stream:
+                  severity: "{{ .Type }}"
+                  reason: "{{ .Reason }}"
+                  testbed: "{{ .InvolvedObject.Namespace }}"
+                  kind: "{{ .InvolvedObject.Kind }}"
+                  node: "{{ .Source.Host }}"
+                  component: "{{ .Source.Component }}"
+                values:
+                - - "{{ .GetTimestampMs }}000000"
+                  - "{{ .Message }}"

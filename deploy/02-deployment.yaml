@@ -10,11 +10,13 @@ spec:
       labels:
         app: event-exporter
         version: v1
+      annotations:
+        app.kubernetes.io/managed-by: test-infra
     spec:
       serviceAccountName: event-exporter
       containers:
         - name: event-exporter
-          image: ghcr.io/opsgenie/kubernetes-event-exporter:v0.11
+          image: hub.pingcap.net/qa/kubernetes-event-exporter:v0.11
           imagePullPolicy: IfNotPresent
           args:
             - -conf=/data/config.yaml
